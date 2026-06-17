@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #F7F3EE;
+  color: #1C1917;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain texture overlay on page bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Override Tailwind's blue focus ring */
+*:focus-visible { outline: 2px solid #C84B31; outline-offset: 2px; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #E8E0D5; }
+::-webkit-scrollbar-thumb { background: #78716C; border-radius: 3px; }
+
+/* ── Utility classes not in Tailwind ── */
+.border-ink  { border-color: #1C1917; }
+.font-serif  { font-family: 'DM Serif Display', Georgia, serif; }
+
+/* Ticket dotted-border style */
+.ticket {
+  border: 1.5px dashed #1C1917;
+  border-radius: 4px;
+  position: relative;
+}
+.ticket::before, .ticket::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  background: #F7F3EE;
+  border: 1.5px solid #1C1917;
+  border-radius: 50%;
+  top: 50%; transform: translateY(-50%);
+}
+.ticket::before { left: -8px; }
+.ticket::after  { right: -8px; }
+
+/* Menu-board dot leader */
+.menu-leader {
+  flex: 1;
+  border-bottom: 1.5px dotted #B8B0A6;
+  margin: 0 8px;
+  margin-bottom: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
